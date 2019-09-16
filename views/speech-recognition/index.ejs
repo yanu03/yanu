@@ -1,0 +1,26 @@
+<% include ../../views/header %>
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+
+<div id="content">
+
+  <div class="wrap">
+    <p>
+			<br>
+			아래 버튼을 누른 후 마이크에 이야기를 해보세요. (마이크와 가까울수록 인식률이 좋습니다)
+		</p>
+    <div id="result">
+      <span class="final" id="final_span"></span>
+      <span class="interim" id="interim_span"></span>
+    </div>
+		<button id="btn-mic" class="off">마이크 <span></span></button><br><br>
+
+		<textarea rows="11" cols="97" id="final_span2"></textarea><br><br>
+
+		
+    <button id="btn-tts">Text to speech</button>
+		<br><br>
+		</ul>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
