@@ -15,6 +15,13 @@ module.exports = (app) => {
     res.render('speech-recognition/index.ejs', {
       title: "- 음성 인식"
     });
-  })
+  }).get('/food',  (req, res) => {
+    res.render('food/page1.ejs', {
+      title: "- 주변 검색"
+    });
+  }).get('/help', (req, res) => {
+    res.render('help/page4.ejs', {
+      title: "- 이용 안내"
+    });
+})
 };
-

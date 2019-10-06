@@ -166,7 +166,7 @@ $(function() {
   function initialize() {
     $btnMic.click(start);
     $('#btn-tts').click(function() {
-      const text = $('#final_span2').text() || '전 음성 인식된 글자를 읽습니다.';
+      const text = document.getElementById('final_span2').value || '글을 입력해 주세요.';
       textToSpeech(text);
     });
   }
