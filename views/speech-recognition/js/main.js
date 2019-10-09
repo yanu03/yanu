@@ -31,17 +31,18 @@ $(function() {
    * 음성 인식 시작 처리
    */
   recognition.onstart = function() {
-    //console.log('onstart', arguments);
+    console.log('onstart', arguments);
     isRecognizing = true;
     $btnMic.attr('class', 'on');
   };
+
 
   /**
    * 음성 인식 종료 처리
    * @returns {boolean}
    */
   recognition.onend = function() {
-    //console.log('onend', arguments);
+    console.log('onend', arguments);
     isRecognizing = false;
 
     if (ignoreEndProcess) {
@@ -51,20 +52,25 @@ $(function() {
     // DO end process
     $btnMic.attr('class', 'off');
     if (!finalTranscript) {
-      //console.log('empty finalTranscript');
+      console.log('empty finalTranscript');
       return false;
     }
   };
+
 
   /**
    * 음성 인식 결과 처리
    * @param event
    */
   recognition.onresult = function(event) {
-    //console.log('onresult', event);
+    console.log('onresult', event);
 
     let interimTranscript = '';
-  
+    if (typeof event.results === 'undefined') {
+      recognition.onend = null;
+      recognition.stop();
+      return;
+    }
 
     for (let i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
@@ -78,23 +84,9 @@ $(function() {
     final_span.innerHTML = linebreak(finalTranscript);
     interim_span.innerHTML = linebreak(interimTranscript);
 
-    //console.log('finalTranscript', finalTranscript);
-    //console.log('interimTranscript', interimTranscript);
+    console.log('finalTranscript', finalTranscript);
+    console.log('interimTranscript', interimTranscript);
     fireCommand(interimTranscript);
-  };
-
-  /**
-   * 음성 인식 에러 처리
-   * @param event
-   */
-  recognition.onerror = function(event) {
-    //console.log('onerror', event);
-
-    if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
-      ignoreEndProcess = true;
-    }
-
-    $btnMic.attr('class', 'off');
   };
 
 
@@ -141,7 +133,7 @@ $(function() {
    * 지원: 크롬, 사파리, 오페라, 엣지
    */
   function textToSpeech(text) {
-    //console.log('textToSpeech', arguments);
+    console.log('textToSpeech', arguments);
 
     // speechSynthesis option
     // const u = new SpeechSynthesisUtterance();
