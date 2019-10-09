@@ -64,11 +64,7 @@ $(function() {
     //console.log('onresult', event);
 
     let interimTranscript = '';
-    if (typeof event.results === 'undefined') {
-      recognition.onend = null;
-      recognition.stop();
-      return;
-    }
+  
 
     for (let i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
@@ -84,7 +80,7 @@ $(function() {
 
     //console.log('finalTranscript', finalTranscript);
     //console.log('interimTranscript', interimTranscript);
-    
+    fireCommand(interimTranscript);
   };
 
   /**
