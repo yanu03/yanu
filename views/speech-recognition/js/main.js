@@ -10,7 +10,7 @@ $(function() {
   }
 
   let isRecognizing = false;
-  let ignoreEndProcess = false;
+  //let ignoreEndProcess = false;
   let finalTranscript = '';
 
   const audio = document.querySelector('#audio');
@@ -44,9 +44,9 @@ $(function() {
     console.log('onend', arguments);
     isRecognizing = false;
 
-    if (ignoreEndProcess) {
+    /*if (ignoreEndProcess) {
       return false;
-    }
+    }*/
 
     // DO end process
     $btnMic.attr('class', 'off');
@@ -94,9 +94,9 @@ $(function() {
   recognition.onerror = function(event) {
     console.log('onerror', event);
 
-    if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
+   /* if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
       ignoreEndProcess = true;
-    }
+    }*/
 
     $btnMic.attr('class', 'off');
   };
@@ -133,7 +133,7 @@ $(function() {
     }
     recognition.lang = language;
     recognition.start();
-    ignoreEndProcess = false;
+    //ignoreEndProcess = false;
 
     finalTranscript = '';
     final_span.innerHTML = '';
