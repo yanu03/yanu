@@ -22,7 +22,7 @@ $(function() {
 
   const $btnMic = $('#btn-mic');
   const $result = $('#result');
-  const $iconMusic = $('#icon-music');
+
 
   recognition.continuous = true;
   recognition.interimResults = true;
@@ -64,11 +64,7 @@ $(function() {
     console.log('onresult', event);
 
     let interimTranscript = '';
-    if (typeof event.results === 'undefined') {
-      recognition.onend = null;
-      recognition.stop();
-      return;
-    }
+
 
     for (let i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
@@ -87,6 +83,19 @@ $(function() {
     fireCommand(interimTranscript);
   };
 
+  /**
+   * 음성 인식 에러 처리
+   * @param event
+   */
+  recognition.onerror = function(event) {
+    console.log('onerror', event);
+
+    if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
+      ignoreEndProcess = true;
+    }
+
+    $btnMic.attr('class', 'off');
+  };
 
 
   /**
