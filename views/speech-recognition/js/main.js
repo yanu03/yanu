@@ -84,7 +84,7 @@ $(function() {
 
     //console.log('finalTranscript', finalTranscript);
     //console.log('interimTranscript', interimTranscript);
-    fireCommand(interimTranscript);
+    
   };
 
   /**
