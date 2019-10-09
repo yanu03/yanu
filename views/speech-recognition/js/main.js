@@ -14,7 +14,7 @@ $(function() {
   let finalTranscript = '';
 
   const audio = document.querySelector('#audio');
-  const recognition = new webkitSpeechRecognition();
+  const recognition = new window.webkitSpeechRecognition();
   const language = 'ko-KR';
   const two_line = /\n\n/g;
   const one_line = /\n/g;
@@ -22,7 +22,7 @@ $(function() {
 
   const $btnMic = $('#btn-mic');
   const $result = $('#result');
-
+  
 
   recognition.continuous = true;
   recognition.interimResults = true;
@@ -70,7 +70,13 @@ $(function() {
       return;
     }
 
-  
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        finalTranscript += event.results[i][0].transcript;
+      } else {
+        interimTranscript += event.results[i][0].transcript;
+      }
+    }
 
     finalTranscript = capitalize(finalTranscript);
     final_span.innerHTML = linebreak(finalTranscript);
