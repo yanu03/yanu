@@ -10,7 +10,7 @@ $(function() {
   }
 
   let isRecognizing = false;
-  //let ignoreEndProcess = false;
+  let ignoreEndProcess = false;
   let finalTranscript = '';
 
   const audio = document.querySelector('#audio');
@@ -31,7 +31,7 @@ $(function() {
    * 음성 인식 시작 처리
    */
   recognition.onstart = function() {
-    console.log('onstart', arguments);
+    //console.log('onstart', arguments);
     isRecognizing = true;
     $btnMic.attr('class', 'on');
   };
@@ -41,17 +41,17 @@ $(function() {
    * @returns {boolean}
    */
   recognition.onend = function() {
-    console.log('onend', arguments);
+    //console.log('onend', arguments);
     isRecognizing = false;
 
-    /*if (ignoreEndProcess) {
+    if (ignoreEndProcess) {
       return false;
-    }*/
+    }
 
     // DO end process
     $btnMic.attr('class', 'off');
     if (!finalTranscript) {
-      console.log('empty finalTranscript');
+      //console.log('empty finalTranscript');
       return false;
     }
   };
@@ -61,7 +61,7 @@ $(function() {
    * @param event
    */
   recognition.onresult = function(event) {
-    console.log('onresult', event);
+    //console.log('onresult', event);
 
     let interimTranscript = '';
     if (typeof event.results === 'undefined') {
@@ -82,8 +82,8 @@ $(function() {
     final_span.innerHTML = linebreak(finalTranscript);
     interim_span.innerHTML = linebreak(interimTranscript);
 
-    console.log('finalTranscript', finalTranscript);
-    console.log('interimTranscript', interimTranscript);
+    //console.log('finalTranscript', finalTranscript);
+    //console.log('interimTranscript', interimTranscript);
     fireCommand(interimTranscript);
   };
 
@@ -92,11 +92,11 @@ $(function() {
    * @param event
    */
   recognition.onerror = function(event) {
-    console.log('onerror', event);
+    //console.log('onerror', event);
 
-   /* if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
+    if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
       ignoreEndProcess = true;
-    }*/
+    }
 
     $btnMic.attr('class', 'off');
   };
@@ -133,7 +133,7 @@ $(function() {
     }
     recognition.lang = language;
     recognition.start();
-    //ignoreEndProcess = false;
+    ignoreEndProcess = false;
 
     finalTranscript = '';
     final_span.innerHTML = '';
@@ -145,7 +145,7 @@ $(function() {
    * 지원: 크롬, 사파리, 오페라, 엣지
    */
   function textToSpeech(text) {
-    console.log('textToSpeech', arguments);
+    //console.log('textToSpeech', arguments);
 
     // speechSynthesis option
     // const u = new SpeechSynthesisUtterance();
