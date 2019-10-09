@@ -44,9 +44,6 @@ $(function() {
     console.log('onend', arguments);
     isRecognizing = false;
 
-    if (ignoreEndProcess) {
-      return false;
-    }
 
     // DO end process
     $btnMic.attr('class', 'off');
