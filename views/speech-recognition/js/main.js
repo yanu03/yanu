@@ -147,17 +147,6 @@ $(function() {
   function textToSpeech(text) {
     console.log('textToSpeech', arguments);
 
-    // speechSynthesis option
-    // const u = new SpeechSynthesisUtterance();
-    // u.text = 'Hello world';
-    // u.lang = 'en-US';
-    // u.rate = 1.2;
-    // u.onend = function(event) {
-    //   log('Finished in ' + event.elapsedTime + ' seconds.');
-    // };
-    // speechSynthesis.speak(u);
-
-    // simple version
     speechSynthesis.speak(new SpeechSynthesisUtterance(text));
   }
   /**

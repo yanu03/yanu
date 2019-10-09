@@ -23,5 +23,5 @@ require('./controllers/route.js')(app);
 
 // Server listen
 http.listen(port, function() {
-  console.log('Easy Order server running at ' + config.webserver.host + ':' + port);
+  console.log('Easy Talk server running at ' + config.webserver.host + ':' + port);
 });
