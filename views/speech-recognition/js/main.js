@@ -36,7 +36,6 @@ $(function() {
     $btnMic.attr('class', 'on');
   };
 
-
   /**
    * 음성 인식 종료 처리
    * @returns {boolean}
@@ -57,7 +56,6 @@ $(function() {
     }
   };
 
-
   /**
    * 음성 인식 결과 처리
    * @param event
@@ -72,7 +70,7 @@ $(function() {
       return;
     }
 
-    for (let i = event.resultIndex; i < event.results.length; i++) {
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         finalTranscript += event.results[i][0].transcript;
       } else {
@@ -87,6 +85,20 @@ $(function() {
     console.log('finalTranscript', finalTranscript);
     console.log('interimTranscript', interimTranscript);
     fireCommand(interimTranscript);
+  };
+
+  /**
+   * 음성 인식 에러 처리
+   * @param event
+   */
+  recognition.onerror = function(event) {
+    console.log('onerror', event);
+
+    if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
+      ignoreEndProcess = true;
+    }
+
+    $btnMic.attr('class', 'off');
   };
 
 
