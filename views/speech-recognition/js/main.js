@@ -50,7 +50,10 @@ $(function() {
 
     // DO end process
     $btnMic.attr('class', 'off');
-  
+    if (!finalTranscript) {
+      console.log('empty finalTranscript');
+      return false;
+    }
   };
 
   /**
@@ -84,19 +87,6 @@ $(function() {
     fireCommand(interimTranscript);
   };
 
-  /**
-   * 음성 인식 에러 처리
-   * @param event
-   */
-  recognition.onerror = function(event) {
-    console.log('onerror', event);
-
-    if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
-      ignoreEndProcess = true;
-    }
-
-    $btnMic.attr('class', 'off');
-  };
 
 
   /**
